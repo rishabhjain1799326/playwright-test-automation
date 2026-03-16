@@ -96,8 +96,12 @@ export class Homepage {
             }
 
         }
-
     }
+    async validDynamicTable(){
+        
+    }
+    
+
 }
 
 
