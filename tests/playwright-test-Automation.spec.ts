@@ -49,7 +49,7 @@ test('should display the correct title', async ({ page }) => {
     // await homepage.VerifyAlertMessage(expectedAlertMessage);
 
     //api testing
-
+    // const response = await page.request.get('https://jsonplaceholder.typicode.com/posts/1');
 
 
 }
