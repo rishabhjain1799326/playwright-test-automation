@@ -68,7 +68,8 @@ export class Homepage {
     }
     async click_Uploadfile() {
 
-        const filepath = "/Users/akshivishnoi/Downloads/Resume202506050425.pdf";
+        // const filepath = "/Users/akshivishnoi/Downloads/Resume202506050425.pdf";
+        const filepath = "test-data/Resume.pdf";
         await this.page.locator('#singleFileInput').setInputFiles(filepath);
 
     }
