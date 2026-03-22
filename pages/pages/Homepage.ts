@@ -146,6 +146,8 @@ export class Homepage {
 
         const cpu = await row.locator("td").nth(headerMap["CPU (%)"]).textContent();
         expect(cpu?.trim()).toMatch(/\d+(\.\d+)?%/);
+
+        //continue to test the pagination...........
     }
 }
 }
