@@ -27,7 +27,11 @@ export class Homepage {
         await this.page.getByLabel("Address").fill(User_address);
     }
     async select_Gender(User_gender: string) {
-        await this.page.getByRole('radio', { name: User_gender }).check();
+        await this.page.waitForSelector('input[type="radio"]');
+         await this.page.locator(`input[value="${User_gender.toLowerCase()}"]`).check();
+        // await this.page.getByRole('radio', { name: User_gender.toLowerCase() }).check();
+
+        
     }
     async select_Days(User_days: string) {
         await this.page.getByRole('checkbox', { name: User_days }).check();
@@ -111,11 +115,37 @@ export class Homepage {
 
         }
     }
-    async validDynamicTable(){
-        
-    }
-    
+   async validDynamicTable() {
 
+    const table = this.page.locator("//table[@id='taskTable']");
+
+    const headers = table.locator("th");
+    const rows = table.locator("tr:has(td)");
+
+    const headerMap: any = {};
+
+    const headerCount = await headers.count();
+
+    for (let i = 0; i < headerCount; i++) {
+        const text = await headers.nth(i).textContent();
+        if (text) headerMap[text.trim()] = i;
+    }
+
+    console.log("Header Map:", headerMap);
+
+    const rowCount = await rows.count();
+
+    for (let i = 0; i < rowCount; i++) {
+
+        const row = rows.nth(i);
+
+        const name = await row.locator("td").nth(headerMap["Name"]).textContent();
+        expect(name).toBeTruthy();
+
+        const cpu = await row.locator("td").nth(headerMap["CPU (%)"]).textContent();
+        expect(cpu?.trim()).toMatch(/\d+(\.\d+)?%/);
+    }
+}
 }
 
 

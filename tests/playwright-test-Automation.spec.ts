@@ -42,6 +42,7 @@ test('should display the correct title', async ({ page }) => {
     // await homepage.selectDateRange(startDate, endDate);
     await homepage.click_Uploadfile();
     await homepage.validatestatictable();
+    await homepage.validDynamicTable();
 
     // const expectedAlertMessage = 'Form submitted successfully!';
     // await homepage.VerifyAlertMessage(expectedAlertMessage);
