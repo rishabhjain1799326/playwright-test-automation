@@ -21,8 +21,6 @@ test('should display the correct title', async ({ page }) => {
     const { startDate, endDate } = getPreviousWeekToToday();
 
     await homepage.navigatetoHomapoage();
-
-
     await homepage.VerifyGUIElement();
 
     await homepage.enter_Name(User_Data.User_name);
