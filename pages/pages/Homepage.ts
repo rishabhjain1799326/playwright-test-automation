@@ -6,10 +6,12 @@ import fs from 'fs';
 export class Homepage {
     constructor(private page: Page) { }
 
-    async navigatetoHomapoage() {
-        await this.page.goto('https://testautomationpractice.blogspot.com/');
-        await expect(this.page).toHaveTitle('Automation Testing Practice');
-    }
+   async navigatetoHomapoage() {
+    await this.page.goto('https://testautomationpractice.blogspot.com/');
+    await this.page.waitForLoadState('domcontentloaded');
+
+    await expect(this.page).toHaveTitle(/Automation Testing Practice/);
+}
     async VerifyGUIElement() {
         await expect(this.page.getByRole('link', { name: 'GUI Elements' })).toBeVisible();
     }
