@@ -1,5 +1,7 @@
 import { Page, expect } from "@playwright/test";
 import { expecteddata } from "../../utils/tabledata";
+import path from 'path';
+import fs from 'fs';
 
 export class Homepage {
     constructor(private page: Page) { }
@@ -66,13 +68,24 @@ export class Homepage {
 
         await expect(this.page.locator('#result')).toHaveText(expectedMessage);
     }
+    // async click_Uploadfile() {
+
+    //     // const filepath = "/Users/akshivishnoi/Downloads/Resume202506050425.pdf";
+    //     const filepath = "test-data/Resume.pdf";
+    //     await this.page.locator('#singleFileInput').setInputFiles(filepath);
+
+    // }
     async click_Uploadfile() {
 
-        // const filepath = "/Users/akshivishnoi/Downloads/Resume202506050425.pdf";
-        const filepath = "test-data/Resume.pdf";
-        await this.page.locator('#singleFileInput').setInputFiles(filepath);
+    const filepath = "test-data/Resume.pdf";
 
-    }
+    const fullPath = path.resolve(filepath);
+    console.log("File being used:", fullPath);
+
+    console.log("File exists:", fs.existsSync(fullPath));
+
+    await this.page.locator('#singleFileInput').setInputFiles(filepath);
+}
     async validatestatictable() {
         const table = await this.page.locator("//div[@id='HTML1']//table");
         const rows = await table.locator("tr").count();
